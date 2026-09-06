@@ -11,7 +11,7 @@ The source of truth is **brevo-email.html**. `npm run build` generates identical
 
 Choose **Start from scratch → HTML custom code** and paste the complete contents of `brevo-email.html`, or use the file upload if available. Do not paste into a rich-text block or the drag-and-drop developer mode. The copy page has a selectable text area and a copy button.
 
-The user explicitly requested keeping the existing placeholder title, subtitle, introductory/programme text and `href="#"` registration link for this visual review. **This is a technically prepared visual template, not final campaign copy.** Replace those before sending. Configure the campaign's unsubscribe link in Brevo; no recipient-specific Brevo markers are inserted into the public preview.
+The title, subtitle and introduction use the approved French copy supplied by the user. The Programme & informations block has been removed. The registration link remains `href="#"` for visual review; replace it before sending. Configure the campaign unsubscribe link in Brevo. No recipient-specific markers are included in the public preview.
 
 ## Images and recovery
 
@@ -46,3 +46,7 @@ References:
 The received screenshot showed inversion in the uncovered top of the event/footer background and around programme content. The programme and outer table had a trailing `background` shorthand that reset their protective gradient. Those resets are removed. The continuous texture now has a second, full-area navy gradient layer beneath it so untextured areas are protected too. Gmail auto-detected links inside event copy inherit the surrounding text style. The button uses `register-button-v1.png` rendered from the existing button text at 3x, with a transparent exterior, white pill and navy lettering.
 
 `node scripts/verify-dark-mode.cjs` checks these specific background regressions and captures a synthetic inversion scenario. This is not a received Gmail message: a new test from Brevo is still required.
+
+## Approved copy update
+
+Replaced title, subtitle and introduction with the French text supplied by the user. Removed the entire Programme & informations block below the CTA. Registration URL remains simulated pending the final link.
