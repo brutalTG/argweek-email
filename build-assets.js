@@ -14,7 +14,7 @@ const specs = {
     'officials-v2.3.b64',
     'officials-v2.4.b64'
   ],
-  'footer-email.jpg': ['footer-v1.b64']
+  'footer-email.jpg': ['footer-cta-source.b64']
 };
 
 for (const [filename, parts] of Object.entries(specs)) {
