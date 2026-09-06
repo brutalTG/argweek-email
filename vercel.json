@@ -1,5 +1,11 @@
 {
   "cleanUrls": true,
-  "buildCommand": "node build-assets.js",
-  "outputDirectory": "."
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "headers": [
+    {"source": "/brevo-email.txt", "headers": [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]},
+    {"source": "/brevo-email-download", "headers": [{"key": "Content-Disposition", "value": "attachment; filename=brevo-email.html"}]},
+    {"source": "/brevo-email-download.html", "headers": [{"key": "Content-Disposition", "value": "attachment; filename=brevo-email.html"}]},
+    {"source": "/assets/generated/:path*", "headers": [{"key": "Cache-Control", "value": "public, max-age=3600"}, {"key": "X-Content-Type-Options", "value": "nosniff"}]}
+  ]
 }

@@ -2,6 +2,11 @@
   "name": "argweek-email",
   "private": true,
   "scripts": {
-    "build": "node build-assets.js"
+    "build": "node build-assets.js",
+    "test": "node scripts/verify-email.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4"
   }
 }

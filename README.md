@@ -1,7 +1,42 @@
-# Argentina Week Paris Email
+# Argentina Week Paris — Brevo
 
-Static, mobile-first email preview and hosted image assets.
+The source of truth is **brevo-email.html**. `npm run build` generates identical `/`, `/email`, `/brevo-email` previews, a plain-text copy and a download. Vercel serves only `dist/`: no image API or Base64 reconstruction is used by this email.
 
-- `index.html`: browser preview
-- `email-template.html`: email-safe HTML with absolute asset URLs after deployment
-- `assets/`: hosted JPEG assets, no Base64
+- Preview: https://argweek-email.vercel.app/email
+- Copy/download page: https://argweek-email.vercel.app/code
+- Plain source: https://argweek-email.vercel.app/brevo-email.txt
+- HTML download: https://argweek-email.vercel.app/brevo-email-download
+
+## Import into Brevo
+
+Choose **Start from scratch → HTML custom code** and paste the complete contents of `brevo-email.html`, or use the file upload if available. Do not paste into a rich-text block or the drag-and-drop developer mode. The copy page has a selectable text area and a copy button.
+
+The user explicitly requested keeping the existing placeholder title, subtitle, introductory/programme text and `href="#"` registration link for this visual review. **This is a technically prepared visual template, not final campaign copy.** Replace those before sending. Configure the campaign's unsubscribe link in Brevo; no recipient-specific Brevo markers are inserted into the public preview.
+
+## Images and recovery
+
+The former Base64 payloads decoded to malformed JPEGs (ministers/footer could not be decoded). Recovered the actual local originals: Frame 1245.png (header), Milei.png, Group 368.png (ministers), Frame 1246.png (texture). They are preserved in `assets/source/`. Sharp decodes each fully, flattens transparency onto #071436, and produces baseline sRGB JPEGs at their original dimensions. No invented portraits, upscaling or AI reconstruction.
+
+The email uses direct public HTTPS `assets/generated/*-brevo-v1.jpg` paths. Existing `*-email.jpg` paths also receive repaired images. When changing images in a future sent campaign, introduce a new versioned filename to avoid email proxy caches. The build fails on corrupt inputs or output decoding errors. Old malformed files are historical only and are not copied to the published directory.
+
+## Rendering
+
+- Fluid 640px presentation tables, explicit spacing/borders, inline color and bgcolor fallbacks.
+- Title 30px desktop / 24px mobile; intro 16px / 15px; no external fonts.
+- Date/place/schedule centered and enclosed by horizontal rules on mobile.
+- Solid navy on all sections, including programme; opaque portraits preserve image colors.
+- Apple color-scheme styles, Outlook conditional 640px wrapper and 96 DPI settings, Gmail iOS blend layers for white live text.
+- Footer texture is decorative with Outlook VML and a navy fallback. CTA label, button and explanation remain live HTML; losing the background does not lose content or clickability.
+
+**No email HTML can guarantee exact colors in every forced-dark-mode Gmail/Outlook version.** Browser light/dark emulation does not reproduce inbox transformations. Recipient image blocking also cannot be overridden. Test sends from the actual Brevo account to Gmail, Outlook Windows and Apple Mail (light and dark) remain necessary; these have not been performed.
+
+## Validation
+
+`npm ci && npm run build && npm test` (test uses installed Google Chrome).
+
+Tests decode all assets, check synchronized HTML, clipping size, image load, horizontal overflow at 320/375/480/640/1024px, light/dark browser modes, stylesheet removal, and image blocking with live CTA. Screenshots/results are saved locally under ignored `qa/`. These tests do not claim Outlook Word/Gmail inbox certification.
+
+References:
+- https://help.brevo.com/hc/en-us/articles/4672127581074-Upload-an-HTML-file-to-design-your-emails-HTML-custom-code-editor
+- https://developers.google.com/workspace/gmail/design/css
+- https://www.litmus.com/blog/the-ultimate-guide-to-dark-mode-for-email-marketers
