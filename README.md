@@ -26,7 +26,7 @@ The email uses direct public HTTPS `assets/generated/*-brevo-v1.jpg` paths. Exis
 - Date/place/schedule centered and enclosed by horizontal rules on mobile.
 - Solid navy on all sections, including programme; opaque portraits preserve image colors.
 - Apple color-scheme styles, Outlook conditional 640px wrapper and 96 DPI settings, Gmail iOS blend layers for white live text.
-- Footer texture is decorative with Outlook VML and a navy fallback. CTA label, button and explanation remain live HTML; losing the background does not lose content or clickability.
+- A single texture spans event details and CTA, bottom-aligned at `background-size:100% auto` (full width, original proportions, no cover zoom). Child cells are transparent. Outlook uses a fixed 640×637px VML fill in the 640px container. Footer texture is decorative with Outlook VML and a navy fallback. CTA label, button and explanation remain live HTML; losing the background does not lose content or clickability.
 
 **No email HTML can guarantee exact colors in every forced-dark-mode Gmail/Outlook version.** Browser light/dark emulation does not reproduce inbox transformations. Recipient image blocking also cannot be overridden. Test sends from the actual Brevo account to Gmail, Outlook Windows and Apple Mail (light and dark) remain necessary; these have not been performed.
 

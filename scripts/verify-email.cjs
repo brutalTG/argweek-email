@@ -25,12 +25,14 @@ const assert = require('node:assert/strict');
     background:getComputedStyle(document.body).backgroundColor,
     cta:!!document.querySelector('a.button-fallback')?.textContent.includes('inscrire'),
     centered:getComputedStyle(document.querySelector('.event-left')).textAlign,
-    footerBackground:getComputedStyle(document.querySelector('.cta-bg')).backgroundImage
+    footerBackground:getComputedStyle(document.querySelector('.event-footer')).backgroundImage
    }));
    assert(info.scroll<=width,`${mode} ${width}: overflow ${info.scroll}`);
    if(mode!=='blocked-images')assert(info.images.every(i=>i.width>0),'broken image');
    assert(info.background==='rgb(7, 20, 54)','background drift');
    assert(info.cta,'missing CTA');
+   assert.equal(await page.locator('.event-footer').evaluate(e=>getComputedStyle(e).backgroundSize),'100% auto');
+   assert.equal(await page.locator('.event-wrap').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)');
    if(width<=480&&mode!=='no-styles')assert.equal(info.centered,'center');
    if(mode==='light'&&[375,640].includes(width))await page.screenshot({path:`qa/preview-${width}.png`,fullPage:true});
    results.push({mode,...info});await page.close();
