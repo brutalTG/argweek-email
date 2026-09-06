@@ -13,7 +13,8 @@ module.exports = function handler(req, res) {
       'officials-v2.2.b64',
       'officials-v2.3.b64',
       'officials-v2.4.b64'
-    ]
+    ],
+    footer: ['footer-v1.b64']
   };
 
   if (!files[name]) {
@@ -28,7 +29,7 @@ module.exports = function handler(req, res) {
 
     const image = Buffer.from(base64, 'base64');
     res.setHeader('Content-Type', 'image/jpeg');
-    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
     res.statusCode = 200;
     return res.end(image);
   } catch (error) {
