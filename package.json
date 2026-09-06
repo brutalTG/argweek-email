@@ -1,0 +1,7 @@
+{
+  "name": "argweek-email",
+  "private": true,
+  "scripts": {
+    "build": "node build-assets.js"
+  }
+}
