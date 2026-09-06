@@ -15,7 +15,7 @@ const assert = require('node:assert/strict');
    const page=await browser.newPage({viewport:{width,height:900},colorScheme:mode==='dark'?'dark':'light'});
    await page.route('https://argweek-email.vercel.app/assets/generated/*',async route=>{
     if(mode==='blocked-images')return route.abort();
-    await route.fulfill({path:path.resolve('dist/assets/generated',new URL(route.request().url()).pathname.split('/').pop()),contentType:'image/jpeg'});
+    await route.fulfill({path:path.resolve('dist/assets/generated',new URL(route.request().url()).pathname.split('/').pop()),contentType:route.request().url().endsWith('.png')?'image/png':'image/jpeg'});
    });
    await page.setContent(mode==='no-styles'?html.replace(/<style>[\s\S]*?<\/style>/g,''):html,{waitUntil:'networkidle'});
    const info=await page.evaluate(()=>({
@@ -23,7 +23,7 @@ const assert = require('node:assert/strict');
     images:[...document.images].map(i=>({src:i.src,width:i.naturalWidth,height:i.naturalHeight})),
     titleSize:getComputedStyle(document.querySelector('.title')).fontSize,
     background:getComputedStyle(document.body).backgroundColor,
-    cta:!!document.querySelector('a.button-fallback')?.textContent.includes('inscrire'),
+    cta:!!document.querySelector('a.button-fallback')?.getAttribute('aria-label')?.includes('inscrire'),
     centered:getComputedStyle(document.querySelector('.event-left')).textAlign,
     footerBackground:getComputedStyle(document.querySelector('.event-footer')).backgroundImage
    }));
@@ -31,7 +31,7 @@ const assert = require('node:assert/strict');
    if(mode!=='blocked-images')assert(info.images.every(i=>i.width>0),'broken image');
    assert(info.background==='rgb(7, 20, 54)','background drift');
    assert(info.cta,'missing CTA');
-   assert.equal(await page.locator('.event-footer').evaluate(e=>getComputedStyle(e).backgroundSize),'100% auto');
+   assert.equal(await page.locator('.event-footer').evaluate(e=>getComputedStyle(e).backgroundSize),'100% auto, 100% 100%');
    assert.equal(await page.locator('.event-wrap').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)');
    if(width<=480&&mode!=='no-styles')assert.equal(info.centered,'center');
    if(mode==='light'&&[375,640].includes(width))await page.screenshot({path:`qa/preview-${width}.png`,fullPage:true});

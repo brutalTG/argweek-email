@@ -20,6 +20,10 @@ async function build() {
     }
     console.log(`${name}: decoded ${info.width}x${info.height}, ${jpeg.length} bytes`);
   }
+  const button = await fs.readFile(path.join(root, 'assets/source/register-button.png'));
+  await sharp(button).raw().toBuffer();
+  await fs.writeFile(path.join(out, 'assets/generated/register-button-v1.png'), button);
+  await fs.writeFile(path.join(root, 'assets/generated/register-button-v1.png'), button);
   const html = await fs.readFile(path.join(root, 'brevo-email.html'), 'utf8');
   for (const file of ['index.html', 'email.html', 'brevo-email.html', 'email-next.html']) {
     await fs.writeFile(path.join(out, file), html);

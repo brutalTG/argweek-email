@@ -26,7 +26,7 @@ The email uses direct public HTTPS `assets/generated/*-brevo-v1.jpg` paths. Exis
 - Date/place/schedule centered and enclosed by horizontal rules on mobile.
 - Solid navy on all sections, including programme; opaque portraits preserve image colors.
 - Apple color-scheme styles, Outlook conditional 640px wrapper and 96 DPI settings, Gmail iOS blend layers for white live text.
-- A single texture spans event details and CTA, bottom-aligned at `background-size:100% auto` (full width, original proportions, no cover zoom). Child cells are transparent. Outlook uses a fixed 640×637px VML fill in the 640px container. Footer texture is decorative with Outlook VML and a navy fallback. CTA label, button and explanation remain live HTML; losing the background does not lose content or clickability.
+- A single texture spans event details and CTA, bottom-aligned at `background-size:100% auto` (full width, original proportions, no cover zoom). Child cells are transparent. Outlook uses a fixed 640×637px VML fill in the 640px container. Footer texture is decorative with Outlook VML and a navy fallback. CTA label and explanation remain live HTML. The button is now a linked 3x PNG with an accessible label and image alt text, preserving white/navy colors under Gmail inversion; if images are blocked, its alt text remains the link. Losing the decorative background does not lose content or clickability.
 
 **No email HTML can guarantee exact colors in every forced-dark-mode Gmail/Outlook version.** Browser light/dark emulation does not reproduce inbox transformations. Recipient image blocking also cannot be overridden. Test sends from the actual Brevo account to Gmail, Outlook Windows and Apple Mail (light and dark) remain necessary; these have not been performed.
 
@@ -40,3 +40,9 @@ References:
 - https://help.brevo.com/hc/en-us/articles/4672127581074-Upload-an-HTML-file-to-design-your-emails-HTML-custom-code-editor
 - https://developers.google.com/workspace/gmail/design/css
 - https://www.litmus.com/blog/the-ultimate-guide-to-dark-mode-for-email-marketers
+
+## Gmail iOS correction after Brevo test
+
+The received screenshot showed inversion in the uncovered top of the event/footer background and around programme content. The programme and outer table had a trailing `background` shorthand that reset their protective gradient. Those resets are removed. The continuous texture now has a second, full-area navy gradient layer beneath it so untextured areas are protected too. Gmail auto-detected links inside event copy inherit the surrounding text style. The button uses `register-button-v1.png` rendered from the existing button text at 3x, with a transparent exterior, white pill and navy lettering.
+
+`node scripts/verify-dark-mode.cjs` checks these specific background regressions and captures a synthetic inversion scenario. This is not a received Gmail message: a new test from Brevo is still required.
