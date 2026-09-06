@@ -29,7 +29,9 @@ module.exports = function handler(req, res) {
 
     const image = Buffer.from(base64, 'base64');
     res.setHeader('Content-Type', 'image/jpeg');
-    res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+    res.setHeader('Cache-Control', 'no-store, max-age=0');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.statusCode = 200;
     return res.end(image);
   } catch (error) {
