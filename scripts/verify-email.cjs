@@ -23,7 +23,7 @@ const assert = require('node:assert/strict');
     images:[...document.images].map(i=>({src:i.src,width:i.naturalWidth,height:i.naturalHeight})),
     titleSize:getComputedStyle(document.querySelector('.title')).fontSize,
     background:getComputedStyle(document.body).backgroundColor,
-    cta:!!document.querySelector('a.button-fallback')?.getAttribute('aria-label')?.includes('inscrire'),
+    cta:!!document.querySelector('a.button-fallback')?.getAttribute('aria-label')?.includes('Register'),
     centered:getComputedStyle(document.querySelector('.event-left')).textAlign,
     footerBackground:getComputedStyle(document.querySelector('.event-footer')).backgroundImage
    }));

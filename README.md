@@ -11,7 +11,8 @@ The source of truth is **brevo-email.html**. `npm run build` generates identical
 
 Choose **Start from scratch → HTML custom code** and paste the complete contents of `brevo-email.html`, or use the file upload if available. Do not paste into a rich-text block or the drag-and-drop developer mode. The copy page has a selectable text area and a copy button.
 
-The title, subtitle and introduction use the approved French copy supplied by the user. The Programme & informations block has been removed. The registration link remains `href="#"` for visual review; replace it before sending. Configure the campaign unsubscribe link in Brevo. No recipient-specific markers are included in the public preview.
+The invitation is now in English with user-supplied copy and images. The CTA links to the supplied Google registration form; the footer contact is a mailto link. Venue text remains unchanged. The ambiguous supplied `14:30 p.m.` was normalized to `2:30 p.m.`. The programme block is absent. Configure unsubscribe handling in Brevo before a campaign send.
+
 
 ## Images and recovery
 
@@ -50,3 +51,7 @@ The received screenshot showed inversion in the uncovered top of the event/foote
 ## Approved copy update
 
 Replaced title, subtitle and introduction with the French text supplied by the user. Removed the entire Programme & informations block below the CTA. Registration URL remains simulated pending the final link.
+
+## English assets (September 7, 2026)
+
+Current image sources are `header-en.png`, `speakers-en.png` (combined Milei and ministers), `footer.png` and `register-button-en.png`. Replaced portrait/header sources and generated files were removed as requested, including their legacy encoded fragments. Current emails use versioned `header-en-v2.jpg`, `speakers-en-v2.jpg`, `register-button-en-v2.png` URLs; older sent emails using removed URLs can no longer fetch those images unless cached. The build clears dist before writing the current assets to avoid deploying obsolete copies.
