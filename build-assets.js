@@ -15,7 +15,7 @@ async function build() {
     const jpeg = await sharp(source).flatten({ background: '#071436' })
       .jpeg({ quality: 94, chromaSubsampling: '4:4:4', progressive: false }).toBuffer();
     const { info } = await sharp(jpeg).raw().toBuffer({ resolveWithObject: true });
-    for (const file of (name === 'footer' ? ['footer-email.jpg', 'footer-brevo-v1.jpg'] : [`${name}-v2.jpg`])) {
+    for (const file of (name === 'footer' ? ['footer-email.jpg', 'footer-brevo-v1.jpg'] : [`${name}-${name === "speakers-en" ? "v3" : "v2"}.jpg`])) {
       await fs.writeFile(path.join(root, 'assets/generated', file), jpeg);
       await fs.writeFile(path.join(out, 'assets/generated', file), jpeg);
     }
@@ -23,8 +23,8 @@ async function build() {
   }
   const button = await fs.readFile(path.join(root, 'assets/source/register-button-en.png'));
   await sharp(button).raw().toBuffer();
-  await fs.writeFile(path.join(out, 'assets/generated/register-button-en-v2.png'), button);
-  await fs.writeFile(path.join(root, 'assets/generated/register-button-en-v2.png'), button);
+  await fs.writeFile(path.join(out, 'assets/generated/register-button-en-v3.png'), button);
+  await fs.writeFile(path.join(root, 'assets/generated/register-button-en-v3.png'), button);
   const html = await fs.readFile(path.join(root, 'brevo-email.html'), 'utf8');
   for (const file of ['index.html', 'email.html', 'brevo-email.html', 'email-next.html']) {
     await fs.writeFile(path.join(out, file), html);

@@ -23,7 +23,7 @@ const assert = require('node:assert/strict');
     images:[...document.images].map(i=>({src:i.src,width:i.naturalWidth,height:i.naturalHeight})),
     titleSize:getComputedStyle(document.querySelector('.title')).fontSize,
     background:getComputedStyle(document.body).backgroundColor,
-    cta:!!document.querySelector('a.button-fallback')?.getAttribute('aria-label')?.includes('Register'),
+    cta:!!document.querySelector('a.button-fallback')?.getAttribute('aria-label')?.includes('Confirm your attendance'),
     centered:getComputedStyle(document.querySelector('.event-left')).textAlign,
     footerBackground:getComputedStyle(document.querySelector('.event-footer')).backgroundImage
    }));
@@ -32,7 +32,7 @@ const assert = require('node:assert/strict');
    assert(info.background==='rgb(7, 20, 54)','background drift');
    assert(info.cta,'missing CTA');
    assert.equal(await page.locator('.event-footer').evaluate(e=>getComputedStyle(e).backgroundSize),'100% auto, 100% 100%');
-   assert.equal(await page.locator('.event-wrap').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)');
+   assert.equal(await page.locator('.event-details').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)');
    if(width<=480&&mode!=='no-styles')assert.equal(info.centered,'center');
    if(mode==='light'&&[375,640].includes(width))await page.screenshot({path:`qa/preview-${width}.png`,fullPage:true});
    results.push({mode,...info});await page.close();

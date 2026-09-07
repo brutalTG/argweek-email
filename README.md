@@ -55,3 +55,9 @@ Replaced title, subtitle and introduction with the French text supplied by the u
 ## English assets (September 7, 2026)
 
 Current image sources are `header-en.png`, `speakers-en.png` (combined Milei and ministers), `footer.png` and `register-button-en.png`. Replaced portrait/header sources and generated files were removed as requested, including their legacy encoded fragments. Current emails use versioned `header-en-v2.jpg`, `speakers-en-v2.jpg`, `register-button-en-v2.png` URLs; older sent emails using removed URLs can no longer fetch those images unless cached. The build clears dist before writing the current assets to avoid deploying obsolete copies.
+
+## Final PDF alignment
+
+Updated subtitle and introduction, added date/place above portraits, used the new Milei (2).png composition, moved invitation/CTA/limited places before the programme, and placed venue details and contact last. Button now says Confirm your attendance and retains the approved Google Form URL. Times consistently use 8:30 a.m., 1:00–2:30 p.m.
+
+Every live text color is explicit, with important declarations, Apple/WebKit text-fill and Gmail-targeted rules for gray and blue copy. White copy retains the established Gmail blend protection. These reinforce editable HTML but cannot promise exact colors in every Gmail forced-dark-mode renderer. User was offered raster text for exact visual colors; no preference received during implementation, so editable copy is retained. Real inbox retest remains required.

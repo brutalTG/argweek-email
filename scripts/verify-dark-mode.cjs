@@ -29,7 +29,7 @@ const path=require('node:path');
   await p.screenshot({path:'qa/synthetic-inversion-375.png',fullPage:true});
   const result=await p.locator('.programme,.event-footer').evaluateAll(es=>es.map(e=>getComputedStyle(e).backgroundImage));
   assert(result.every(s=>s.includes('linear-gradient')));
-  assert(await p.locator('.button-fallback img').evaluate(e=>e.complete&&e.naturalWidth===540));
+  assert(await p.locator('.button-fallback img').evaluate(e=>e.complete&&e.naturalWidth===1032));
   console.log('PASS: protected background layers and raster CTA under synthetic color inversion. Requires real Brevo/Gmail retest.');
  }finally{await b.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
