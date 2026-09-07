@@ -15,7 +15,7 @@ async function build() {
     const jpeg = await sharp(source).flatten({ background: '#071436' })
       .jpeg({ quality: 94, chromaSubsampling: '4:4:4', progressive: false }).toBuffer();
     const { info } = await sharp(jpeg).raw().toBuffer({ resolveWithObject: true });
-    for (const file of (name === 'footer' ? ['footer-email.jpg', 'footer-brevo-v1.jpg'] : [`${name}-${name === "speakers-en" ? "v3" : "v2"}.jpg`])) {
+    for (const file of (name === 'footer' ? ['footer-email.jpg', 'footer-brevo-v1.jpg'] : [`${name}-${name === "speakers-en" ? "v4" : "v2"}.jpg`])) {
       await fs.writeFile(path.join(root, 'assets/generated', file), jpeg);
       await fs.writeFile(path.join(out, 'assets/generated', file), jpeg);
     }
