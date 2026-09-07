@@ -25,6 +25,10 @@ async function build() {
   await sharp(button).raw().toBuffer();
   await fs.writeFile(path.join(out, 'assets/generated/register-button-en-v3.png'), button);
   await fs.writeFile(path.join(root, 'assets/generated/register-button-en-v3.png'), button);
+  const badge = await fs.readFile(path.join(root, 'assets/source/limited-places.png'));
+  await sharp(badge).raw().toBuffer();
+  await fs.writeFile(path.join(out, 'assets/generated/limited-places-v1.png'), badge);
+  await fs.writeFile(path.join(root, 'assets/generated/limited-places-v1.png'), badge);
   const html = await fs.readFile(path.join(root, 'brevo-email.html'), 'utf8');
   for (const file of ['index.html', 'email.html', 'brevo-email.html', 'email-next.html']) {
     await fs.writeFile(path.join(out, file), html);
